@@ -1,3 +1,6 @@
+  const [networkWarning, setNetworkWarning] = useState("");
+  // Desired chain ID (e.g., Sepolia = 11155111, Goerli = 5, Mainnet = 1)
+  const DESIRED_CHAIN_ID = 11155111; // Change this to your target network
 
 import React, { useState } from "react";
 import { ethers } from "ethers";
@@ -30,6 +33,12 @@ function App() {
     if (window.ethereum) {
       const prov = new ethers.BrowserProvider(window.ethereum);
       await prov.send("eth_requestAccounts", []);
+      const network = await prov.getNetwork();
+      if (network.chainId !== DESIRED_CHAIN_ID) {
+        setNetworkWarning(`Warning: You are connected to chain ID ${network.chainId}. Please switch MetaMask to Sepolia (chain ID 11155111).`);
+      } else {
+        setNetworkWarning("");
+      }
       const signer = await prov.getSigner();
       setProvider(prov);
       setSigner(signer);
@@ -116,6 +125,9 @@ function App() {
       <button onClick={connectWallet} disabled={!!signer}>
         {signer ? "Wallet Connected" : "Connect Wallet"}
       </button>
+      {networkWarning && (
+        <div style={{ color: "red", marginTop: 10 }}>{networkWarning}</div>
+      )}
       <hr />
       <h3>Deploy Contract</h3>
       <button onClick={deployContract} disabled={deploying || !signer}>
