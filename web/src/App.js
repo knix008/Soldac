@@ -1,7 +1,3 @@
-  const [networkWarning, setNetworkWarning] = useState("");
-  // Desired chain ID (e.g., Sepolia = 11155111, Goerli = 5, Mainnet = 1)
-  const DESIRED_CHAIN_ID = 11155111; // Change this to your target network
-
 import React, { useState } from "react";
 import { ethers } from "ethers";
 import prescriptionAbi from "./abi/Prescription.json";
@@ -26,19 +22,15 @@ function App() {
   const [useResult, setUseResult] = useState("");
   const [infoHash, setInfoHash] = useState("");
   const [infoResult, setInfoResult] = useState(null);
+  // const [networkWarning, setNetworkWarning] = useState("");
 
+  // Removed network checking
 
   // Connect wallet (MetaMask only)
   const connectWallet = async () => {
     if (window.ethereum) {
       const prov = new ethers.BrowserProvider(window.ethereum);
       await prov.send("eth_requestAccounts", []);
-      const network = await prov.getNetwork();
-      if (network.chainId !== DESIRED_CHAIN_ID) {
-        setNetworkWarning(`Warning: You are connected to chain ID ${network.chainId}. Please switch MetaMask to Sepolia (chain ID 11155111).`);
-      } else {
-        setNetworkWarning("");
-      }
       const signer = await prov.getSigner();
       setProvider(prov);
       setSigner(signer);
@@ -55,10 +47,11 @@ function App() {
     try {
       const factory = new ethers.ContractFactory(CONTRACT_ABI, prescriptionAbi.bytecode, signer);
       const contract = await factory.deploy();
-      await contract.deploymentTransaction().wait();
+      await contract.waitForDeployment(); // ethers v6: wait for deployment
       if (contract && contract.address) {
         setContractAddress(contract.address);
         setContract(contract);
+        setDeployError(""); // Clear error on success
       } else {
         setDeployError("Deployment failed: contract address not found.");
       }
@@ -125,9 +118,7 @@ function App() {
       <button onClick={connectWallet} disabled={!!signer}>
         {signer ? "Wallet Connected" : "Connect Wallet"}
       </button>
-      {networkWarning && (
-        <div style={{ color: "red", marginTop: 10 }}>{networkWarning}</div>
-      )}
+  {/* Network warning removed */}
       <hr />
       <h3>Deploy Contract</h3>
       <button onClick={deployContract} disabled={deploying || !signer}>
