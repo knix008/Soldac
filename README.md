@@ -45,11 +45,25 @@ npx hardhat test test/Prescription.js
 
 ## Deploying the Prescription Contract (Local Network)
 
-To deploy the `Prescription` contract to the local Hardhat network:
+
+## Environment Variables
+
+Create a `.env` file in the project root (not in `web/`) with the following variables:
+
+```
+PRIVATE_KEY=your_private_key_here
+RPC_URL=your_rpc_url_here
+```
+
+## Deploying the Prescription Contract (Custom Network)
+
+To deploy the `Prescription` contract using the custom network and environment variables:
 
 ```sh
-npx hardhat run scripts/deploy-prescription.js --config hardhat.config.js
+npx hardhat run scripts/deploy-prescription.js --network custom
 ```
+
+This will use the `PRIVATE_KEY` and `RPC_URL` from your `.env` file for deployment.
 
 ## Writing New Tests
 

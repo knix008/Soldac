@@ -1,3 +1,5 @@
+
+import "dotenv/config";
 import hardhat from "hardhat";
 const { ethers } = hardhat;
 
