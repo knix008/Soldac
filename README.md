@@ -65,10 +65,17 @@ const { ethers } = hardhat;
 
 ## Directory Structure
 
-- `Contracts/` — Solidity smart contracts
+- `contracts/` — Solidity smart contracts
 - `scripts/` — Deployment scripts (JavaScript, ES modules)
 - `test/` — JavaScript test files
 
 ---
 
-For more information, see the [Hardhat documentation](https://hardhat.org/docs/).
+
+## Web DApp (React)
+
+- The `web/` directory contains a React app for interacting with the Prescription smart contract.
+- See `web/README.md` for usage instructions.
+
+---
+For more information, see the [Hardhat documentation](https://hardhat.org/docs/) and [Ethers.js documentation](https://docs.ethers.org/v6/).
