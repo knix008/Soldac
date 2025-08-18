@@ -1,0 +1,85 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "prescriptionHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogRegisterPrescription",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "prescriptionHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "LogUsePrescription",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "prescriptionHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "GetPrescriptionInfo",
+      "outputs": [
+        {
+          "components": [
+            { "internalType": "uint256", "name": "prescribeDate", "type": "uint256" },
+            { "internalType": "uint256", "name": "prepareDate", "type": "uint256" },
+            { "internalType": "uint256", "name": "endDate", "type": "uint256" },
+            { "internalType": "enum Prescription.PrescriptionStatus", "name": "status", "type": "uint8" },
+            { "internalType": "string", "name": "hospital", "type": "string" },
+            { "internalType": "string", "name": "pharmacy", "type": "string" }
+          ],
+          "internalType": "struct Prescription.PrescriptionInfo",
+          "name": "prescription",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "prescriptionHash", "type": "bytes32" },
+        { "internalType": "uint256", "name": "prescribeDate", "type": "uint256" },
+        { "internalType": "uint256", "name": "endDate", "type": "uint256" },
+        { "internalType": "string", "name": "hospital", "type": "string" }
+      ],
+      "name": "RegisterPrescription",
+      "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes32", "name": "prescriptionHash", "type": "bytes32" },
+        { "internalType": "uint256", "name": "prepareDate", "type": "uint256" },
+        { "internalType": "string", "name": "pharmacy", "type": "string" }
+      ],
+      "name": "UsePrescription",
+      "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
