@@ -9,7 +9,7 @@ function App() {
   const [provider, setProvider] = useState();
   const [signer, setSigner] = useState();
   const [contract, setContract] = useState();
-  const [contractAddress, setContractAddress] = useState(process.env.REACT_APP_CONTRACT_ADDRESS || "");
+  const [contractAddress, setContractAddress] = useState("");
   const [deploying, setDeploying] = useState(false);
   const [deployError, setDeployError] = useState("");
   const [registerHash, setRegisterHash] = useState("");
@@ -25,30 +25,16 @@ function App() {
   const [infoResult, setInfoResult] = useState(null);
 
 
-  // Connect wallet or use .env endpoint
+  // Connect wallet (MetaMask only)
   const connectWallet = async () => {
-    const endpoint = process.env.REACT_APP_ENDPOINT_URL;
-    const chainId = process.env.REACT_APP_CHAIN_ID;
-    const account = process.env.REACT_APP_ACCOUNT_ADDRESS;
-    if (endpoint) {
-      // Use custom endpoint from .env
-      const prov = new ethers.JsonRpcProvider(endpoint, chainId ? parseInt(chainId) : undefined);
-      setProvider(prov);
-      if (account) {
-        const signer = await prov.getSigner(account);
-        setSigner(signer);
-      } else {
-        setSigner(undefined);
-      }
-    } else if (window.ethereum) {
-      // Use MetaMask
+    if (window.ethereum) {
       const prov = new ethers.BrowserProvider(window.ethereum);
       await prov.send("eth_requestAccounts", []);
       const signer = await prov.getSigner();
       setProvider(prov);
       setSigner(signer);
     } else {
-      alert("MetaMask not detected and no endpoint in .env");
+      alert("MetaMask not detected");
     }
   };
 
@@ -128,17 +114,8 @@ function App() {
     <div style={{ maxWidth: 600, margin: "2rem auto", fontFamily: "sans-serif" }}>
       <h2>Prescription Smart Contract DApp</h2>
       <button onClick={connectWallet} disabled={!!signer}>
-        {signer ? (process.env.REACT_APP_ACCOUNT_ADDRESS ? `Connected (.env)` : "Wallet Connected") : "Connect Wallet"}
+        {signer ? "Wallet Connected" : "Connect Wallet"}
       </button>
-      {process.env.REACT_APP_ACCOUNT_ADDRESS && (
-        <div>Account: <b>{process.env.REACT_APP_ACCOUNT_ADDRESS}</b></div>
-      )}
-      {process.env.REACT_APP_ENDPOINT_URL && (
-        <div>Endpoint: <b>{process.env.REACT_APP_ENDPOINT_URL}</b></div>
-      )}
-      {process.env.REACT_APP_CHAIN_ID && (
-        <div>Chain ID: <b>{process.env.REACT_APP_CHAIN_ID}</b></div>
-      )}
       <hr />
       <h3>Deploy Contract</h3>
       <button onClick={deployContract} disabled={deploying || !signer}>
