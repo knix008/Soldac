@@ -1,57 +1,74 @@
-# Sample Hardhat 3 Beta Project (`mocha` and `ethers`)
 
-This project showcases a Hardhat 3 Beta project using `mocha` for tests and the `ethers` library for Ethereum interactions.
+# Soldac Smart Contract Project
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+This project uses Hardhat v2 and Ethers.js for Ethereum smart contract development and testing, with a JavaScript-only workflow.
 
 ## Project Overview
 
-This example project includes:
+- Hardhat v2 configuration (JavaScript, ES modules)
+- All contracts and tests written in Solidity and JavaScript (no TypeScript)
+- Example contract: `Prescription.sol`
+- Example test: `test/Prescription.js`
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using `mocha` and ethers.js
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+## Getting Started
 
-## Usage
+Install dependencies:
 
-### Running Tests
+```sh
+npm install
+```
 
-To run all the tests in the project, execute the following command:
 
-```shell
+## Compiling Contracts
+
+To compile all Solidity contracts in the project:
+
+```sh
+npx hardhat compile --config hardhat.config.js
+```
+
+This will generate ABI and bytecode in the `artifacts/` directory.
+
+## Running Tests
+
+To run all JavaScript tests:
+
+```sh
 npx hardhat test
 ```
 
-You can also selectively run the Solidity or `mocha` tests:
+Or to run a specific test file:
 
-```shell
-npx hardhat test solidity
-npx hardhat test mocha
+```sh
+npx hardhat test test/Prescription.js
 ```
 
-### Make a deployment to Sepolia
+## Deploying the Prescription Contract (Local Network)
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
+To deploy the `Prescription` contract to the local Hardhat network:
 
-To run the deployment to a local chain:
-
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
+```sh
+npx hardhat run scripts/deploy-prescription.js --config hardhat.config.js
 ```
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+## Writing New Tests
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
+- Add new test files in the `test/` directory with a `.js` extension.
+- Use Mocha and Chai for writing tests.
+- Import Hardhat and Ethers.js as ES modules:
 
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```js
+import { expect } from "chai";
+import hardhat from "hardhat";
+const { ethers } = hardhat;
 ```
 
-After setting the variable, you can run the deployment with the Sepolia network:
+## Directory Structure
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
-```
+- `Contracts/` — Solidity smart contracts
+- `scripts/` — Deployment scripts (JavaScript, ES modules)
+- `test/` — JavaScript test files
+
+---
+
+For more information, see the [Hardhat documentation](https://hardhat.org/docs/).
