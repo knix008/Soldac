@@ -2,6 +2,32 @@
 
 ## Quick Start
 
+### Prerequisites Setup
+
+#### 1. Configure Environment Variables
+```bash
+cd /path/to/Soldac/cli
+
+# Set up environment variables
+node update-env.js
+
+# Configure RPC URLs
+node setup-rpc-urls.js
+
+# Set contract address (after deployment)
+node set-contract-address.js
+```
+
+#### 2. Update .env File
+Make sure your `.env` file contains:
+```env
+PRIVATE_KEY=your_private_key_here
+HEALTHCARE_CONTRACT_ADDRESS=your_deployed_contract_address
+RPC_URL=http://localhost:8545
+SEPOLIA_RPC_URL=your_sepolia_rpc_url
+MAINNET_RPC_URL=your_mainnet_rpc_url
+```
+
 ### Option 1: Local Development
 
 #### 1. Start a Local Blockchain Network

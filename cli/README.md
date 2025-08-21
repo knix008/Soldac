@@ -13,8 +13,9 @@ A command-line interface application for interacting with the deployed Healthcar
 ## Prerequisites
 
 1. **Node.js** (v16 or higher)
-2. **Local Blockchain Network** (Hardhat, Ganache, or similar)
-3. **Deployed Healthcare Contract** at address: `0x5FbDB2315678afecb367f032d93F642f64180aa3`
+2. **Blockchain Network** (Local Hardhat, Sepolia testnet, or Ethereum mainnet)
+3. **Deployed Healthcare Contract** (address configured in `.env` file)
+4. **Environment Configuration** (`.env` file with RPC URLs and contract address)
 
 ## Installation
 
@@ -27,6 +28,44 @@ A command-line interface application for interacting with the deployed Healthcar
    ```bash
    npm install
    ```
+
+3. Set up environment configuration:
+   ```bash
+   # Update .env file with required variables
+   node update-env.js
+   
+   # Set up RPC URLs
+   node setup-rpc-urls.js
+   
+   # Set contract address
+   node set-contract-address.js
+   ```
+
+## Environment Configuration
+
+The CLI uses environment variables for configuration. Create a `.env` file in the project root with the following variables:
+
+```env
+# Private key for signing transactions
+PRIVATE_KEY=your_private_key_here
+
+# Contract address
+HEALTHCARE_CONTRACT_ADDRESS=your_deployed_contract_address
+
+# Network RPC URLs
+RPC_URL=http://localhost:8545
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/your_project_id
+MAINNET_RPC_URL=https://mainnet.infura.io/v3/your_project_id
+```
+
+### Setup Scripts
+
+Use the provided setup scripts to configure your environment:
+
+- **`update-env.js`**: Adds missing environment variables to `.env`
+- **`setup-rpc-urls.js`**: Interactive setup for RPC URLs
+- **`set-contract-address.js`**: Set the deployed contract address
+- **`check-balance.js`**: Check ETH balance across networks
 
 ## Usage
 

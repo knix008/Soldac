@@ -29,16 +29,25 @@ function updateEnvFile() {
 
     // Check and add SEPOLIA_RPC_URL
     if (!envContent.includes('SEPOLIA_RPC_URL=')) {
-      envContent += `\n# Network RPC URLs\nSEPOLIA_RPC_URL=https://sepolia.infura.io/v3/135887a7cd1544ee9c68a3d6fc24d10e\n`;
+      envContent += `\n# Network RPC URLs\nSEPOLIA_RPC_URL=\n`;
       updated = true;
-      console.log('✅ Added SEPOLIA_RPC_URL to .env file');
+      console.log('✅ Added SEPOLIA_RPC_URL placeholder to .env file');
+      console.log('💡 Please update SEPOLIA_RPC_URL with your Sepolia RPC endpoint');
     }
 
     // Check and add MAINNET_RPC_URL
     if (!envContent.includes('MAINNET_RPC_URL=')) {
-      envContent += `MAINNET_RPC_URL=https://mainnet.infura.io/v3/135887a7cd1544ee9c68a3d6fc24d10e\n`;
+      envContent += `MAINNET_RPC_URL=\n`;
       updated = true;
-      console.log('✅ Added MAINNET_RPC_URL to .env file');
+      console.log('✅ Added MAINNET_RPC_URL placeholder to .env file');
+      console.log('💡 Please update MAINNET_RPC_URL with your Mainnet RPC endpoint');
+    }
+
+    // Check and add RPC_URL (for local development)
+    if (!envContent.includes('RPC_URL=')) {
+      envContent += `RPC_URL=http://localhost:8545\n`;
+      updated = true;
+      console.log('✅ Added RPC_URL to .env file (for local Hardhat node)');
     }
 
     if (updated) {

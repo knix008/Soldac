@@ -29,7 +29,11 @@ async function testCLI() {
     const contractABI = contractJson.abi;
 
     // Use Sepolia network for testing
-    const provider = new ethers.providers.JsonRpcProvider('https://sepolia.infura.io/v3/135887a7cd1544ee9c68a3d6fc24d10e');
+    const sepoliaRpcUrl = process.env.SEPOLIA_RPC_URL;
+    if (!sepoliaRpcUrl) {
+      throw new Error('SEPOLIA_RPC_URL not found in .env file');
+    }
+    const provider = new ethers.providers.JsonRpcProvider(sepoliaRpcUrl);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, provider);
 
     // Use private key for signing

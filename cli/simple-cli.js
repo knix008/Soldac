@@ -31,12 +31,12 @@ const NETWORKS = {
   },
   '2': {
     name: 'Sepolia Testnet',
-    url: process.env.SEPOLIA_RPC_URL || 'https://sepolia.infura.io/v3/135887a7cd1544ee9c68a3d6fc24d10e',
+    url: process.env.SEPOLIA_RPC_URL,
     chainId: 11155111
   },
   '3': {
     name: 'Ethereum Mainnet',
-    url: process.env.MAINNET_RPC_URL || 'https://mainnet.infura.io/v3/135887a7cd1544ee9c68a3d6fc24d10e',
+    url: process.env.MAINNET_RPC_URL,
     chainId: 1
   },
   '4': {

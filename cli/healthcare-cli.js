@@ -56,7 +56,11 @@ class HealthcareCLI {
       const contractABI = contractJson.abi;
 
       // Initialize provider and contract
-      this.provider = new ethers.providers.JsonRpcProvider('http://localhost:8545');
+      const rpcUrl = process.env.RPC_URL;
+      if (!rpcUrl) {
+        throw new Error('RPC_URL environment variable is required. Please set it in your .env file.');
+      }
+      this.provider = new ethers.providers.JsonRpcProvider(rpcUrl);
       this.contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, this.provider);
 
       // Get signer (first account)
