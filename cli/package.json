@@ -1,0 +1,24 @@
+{
+  "name": "healthcare-cli",
+  "version": "1.0.0",
+  "description": "CLI application for interacting with Healthcare smart contract",
+  "main": "healthcare-cli.js",
+  "type": "module",
+  "scripts": {
+    "start": "node healthcare-cli.js",
+    "dev": "node healthcare-cli.js"
+  },
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "dotenv": "^17.2.1"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "smart-contract",
+    "healthcare",
+    "cli"
+  ],
+  "author": "Soldac Team",
+  "license": "ISC"
+}
