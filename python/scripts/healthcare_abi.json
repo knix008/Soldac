@@ -1,0 +1,137 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "healthcareHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "LogDeleteHealthcare",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "healthcareHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "LogRegisterHealthcare",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "healthcareHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "DeleteHealthcare",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "healthcareHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "GetHealthcareInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "registeredDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deletedDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "phoneNumber",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "hospital",
+            "type": "string"
+          },
+          {
+            "internalType": "enum Healthcare.HealthcareStatus",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum Healthcare.HealthcareType",
+            "name": "healthcareType",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Healthcare.HealthcareInfo",
+        "name": "healthcare",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "healthcareHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "phoneNumber",
+        "type": "string"
+      },
+      {
+        "internalType": "enum Healthcare.HealthcareType",
+        "name": "healthcareType",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "hospital",
+        "type": "string"
+      }
+    ],
+    "name": "RegisterHealthcare",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
